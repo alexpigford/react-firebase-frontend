@@ -21,7 +21,9 @@ export class home extends Component {
   }
   render() {
     let recentChirpsMarkup = this.state.chirps ? (
-      this.state.chirps.map((chirp) => <Chirp chirp={chirp} />)
+      this.state.chirps.map((chirp) => (
+        <Chirp key={chirp.chirpId} chirp={chirp} />
+      ))
     ) : (
       <p>Loading...</p>
     );

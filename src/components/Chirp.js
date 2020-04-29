@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Link from "react-router-dom/Link";
+import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 // MUI
 import Card from "@material-ui/core/Card";
@@ -24,6 +26,7 @@ const styles = {
 
 class Chirp extends Component {
   render() {
+    dayjs.extend(relativeTime);
     const {
       classes,
       chirp: {
@@ -53,7 +56,7 @@ class Chirp extends Component {
             {userHandle}
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            {createdAt}
+            {dayjs(createdAt).fromNow()}
           </Typography>
           <Typography variant="body1">{body}</Typography>
         </CardContent>
