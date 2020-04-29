@@ -23,8 +23,8 @@ if (token) {
   const decodedToken = jwtDecode(token);
   console.log("decoded token: ", decodedToken);
   if (decodedToken.exp * 1000 < Date.now()) {
-    window.location.href = "/login";
     authenticated = false;
+    window.location.href = "/login";
   } else {
     authenticated = true;
   }
