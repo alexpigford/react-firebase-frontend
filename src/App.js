@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import themeFile from "./utility/theme";
+import themeObject from "./utility/theme";
 import jwtDecode from "jwt-decode";
 
 // components
@@ -15,7 +15,7 @@ import home from "./pages/home";
 import login from "./pages/login";
 import signup from "./pages/signup";
 
-const theme = createMuiTheme(themeFile);
+const theme = createMuiTheme(themeObject);
 
 let authenticated;
 const token = localStorage.FBIdToken;
