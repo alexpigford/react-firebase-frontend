@@ -3,6 +3,8 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LOADING_USER,
+  LIKE_CHIRP,
+  UNLIKE_CHIRP,
 } from "../types";
 
 const initialState = {
@@ -32,6 +34,24 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
+      };
+    case LIKE_CHIRP:
+      return {
+        ...state,
+        likes: [
+          ...state.likes,
+          {
+            userHandle: state.credentials.handle,
+            chirpId: action.payload.chirpId,
+          },
+        ],
+      };
+    case UNLIKE_CHIRP:
+      return {
+        ...state,
+        likes: state.likes.filter(
+          (like) => like.chirpId !== action.payload.chirpId
+        ),
       };
     default:
       return state;

@@ -1,30 +1,22 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 import Chirp from "../components/Chirp";
 import Profile from "../components/Profile";
 
-export class home extends Component {
-  state = {
-    chirps: null,
-  };
+import { connect } from "react-redux";
+import { getChirps } from "../redux/actions/dataActions";
+
+class home extends Component {
   componentDidMount() {
-    axios
-      .get("/chirps")
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          chirps: res.data,
-        });
-      })
-      .catch((err) => console.log(err));
+    this.props.getChirps();
   }
   render() {
-    let recentChirpsMarkup = this.state.chirps ? (
-      this.state.chirps.map((chirp) => (
-        <Chirp key={chirp.chirpId} chirp={chirp} />
-      ))
+    const { chirps, loading } = this.props.data;
+    let recentChirpsMarkup = !loading ? (
+      chirps.map((chirp) => <Chirp key={chirp.chirpId} chirp={chirp} />)
     ) : (
       <p>Loading...</p>
     );
@@ -41,4 +33,13 @@ export class home extends Component {
   }
 }
 
-export default home;
+home.propTypes = {
+  getChirps: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  data: state.data,
+});
+
+export default connect(mapStateToProps, { getChirps })(home);
