@@ -13,7 +13,10 @@ export default {
       contrastText: "#ffffff",
     },
   },
-  spreadThis: {
+  restOfTheme: {
+    typography: {
+      useNextVariants: true,
+    },
     form: {
       textAlign: "center",
     },

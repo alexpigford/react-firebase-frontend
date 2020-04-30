@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import EditDetails from "./EditDetails";
 
 // MUI
 import Button from "@material-ui/core/Button";
@@ -17,6 +18,7 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
+import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
 
 // redux
 import { connect } from "react-redux";
@@ -84,6 +86,10 @@ class Profile extends Component {
     fileInput.click();
   };
 
+  handleLogout = () => {
+    this.props.logoutUser();
+  };
+
   render() {
     const {
       classes,
@@ -127,26 +133,31 @@ class Profile extends Component {
               <hr />
               {location && (
                 <Fragment>
-                  <LocationOn color="primary">
-                    <span>{location}</span>
-                  </LocationOn>
+                  <LocationOn color="primary" />
+                  <span>{location}</span>
+
                   <hr />
                 </Fragment>
               )}
               {website && (
                 <Fragment>
-                  <LinkIcon color="primary">
-                    <a href={website} target="_blank" rel="noopener noreferrer">
-                      {" "}
-                      {website}
-                    </a>
-                    <hr />
-                  </LinkIcon>
+                  <LinkIcon color="primary" />
+                  <a href={website} target="_blank" rel="noopener noreferrer">
+                    {" "}
+                    {website}
+                  </a>
+                  <hr />
                 </Fragment>
               )}
               <CalendarToday color="primary" />{" "}
-              <span>joined {dayjs(createdAt).format("MMM YYYY")}</span>
+              <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
             </div>
+            <Tooltip title="Log Out" placement="top">
+              <IconButton onClick={this.handleLogout}>
+                <KeyboardReturn color="primary" />
+              </IconButton>
+            </Tooltip>
+            <EditDetails />
           </div>
         </Paper>
       ) : (
