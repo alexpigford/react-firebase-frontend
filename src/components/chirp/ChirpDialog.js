@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../utility/MyButton";
+import MyButton from "../../utility/MyButton";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import LikeButton from "./LikeButton";
+import Replies from "./Replies";
 
 // MUI
 import Dialog from "@material-ui/core/Dialog";
@@ -20,14 +21,10 @@ import ChatIcon from "@material-ui/icons/Chat";
 
 // redux
 import { connect } from "react-redux";
-import { getChirp } from "../redux/actions/dataActions";
+import { getChirp } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
   ...theme.restOfTheme,
-  invisibleSeparator: {
-    border: "none",
-    margin: 4,
-  },
   profileImage: {
     width: 200,
     height: 200,
@@ -77,6 +74,7 @@ class ChirpDialog extends Component {
         replyCount,
         userImage,
         userHandle,
+        replies,
       },
       UI: { loading },
     } = this.props;
@@ -88,11 +86,7 @@ class ChirpDialog extends Component {
     ) : (
       <Grid container spacing={5}>
         <Grid item sm={5}>
-          <img
-            src={userImage}
-            alt="profile picture"
-            className={classes.profileImage}
-          />
+          <img src={userImage} alt="profile" className={classes.profileImage} />
         </Grid>
         <Grid item sm={7}>
           <Typography
@@ -116,6 +110,8 @@ class ChirpDialog extends Component {
           </MyButton>
           <span>{replyCount} Replies</span>
         </Grid>
+        <hr className={classes.visibleSeparator} />
+        <Replies replies={replies} />
       </Grid>
     );
 

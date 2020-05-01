@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
 import PropTypes from "prop-types";
 
-import Chirp from "../components/Chirp";
-import Profile from "../components/Profile";
+import Chirp from "../components/chirp/Chirp";
+import Profile from "../components/profile/Profile";
 
 import { connect } from "react-redux";
 import { getChirps } from "../redux/actions/dataActions";

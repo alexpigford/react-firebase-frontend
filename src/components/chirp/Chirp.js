@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PropTypes from "prop-types";
-import MyButton from "../utility/MyButton";
+import MyButton from "../../utility/MyButton";
 import DeleteChirp from "./DeleteChirp";
 import ChirpDialog from "./ChirpDialog";
 import LikeButton from "./LikeButton";
