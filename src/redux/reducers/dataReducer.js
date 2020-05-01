@@ -1,4 +1,10 @@
-import { SET_CHIRPS, LIKE_CHIRP, UNLIKE_CHIRP, LOADING_DATA } from "../types";
+import {
+  SET_CHIRPS,
+  LIKE_CHIRP,
+  UNLIKE_CHIRP,
+  LOADING_DATA,
+  DELETE_CHIRP,
+} from "../types";
 
 const initialState = {
   chirps: [],
@@ -27,6 +33,13 @@ export default function (state = initialState, action) {
       state.chirps[index] = action.payload;
       return {
         ...state,
+      };
+    case DELETE_CHIRP:
+      return {
+        ...state,
+        chirps: state.chirps.filter(
+          (chirp) => chirp.chirpId !== action.payload
+        ),
       };
     default:
       return state;

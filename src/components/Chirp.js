@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PropTypes from "prop-types";
 import MyButton from "../utility/MyButton";
+import DeleteChirp from "./DeleteChirp";
 
 // MUI
 import Card from "@material-ui/core/Card";
@@ -23,6 +24,7 @@ import { likeChirp, unlikeChirp } from "../redux/actions/dataActions";
 
 const styles = {
   card: {
+    position: "relative",
     display: "flex",
     marginBottom: 20,
   },
@@ -68,7 +70,10 @@ class Chirp extends Component {
         likeCount,
         replyCount,
       },
-      user: { authenticated },
+      user: {
+        authenticated,
+        credentials: { handle },
+      },
     } = this.props;
 
     const likeButton = !authenticated ? (
@@ -87,6 +92,11 @@ class Chirp extends Component {
       </MyButton>
     );
 
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <DeleteChirp chirpId={chirpId} />
+      ) : null;
+
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -103,6 +113,7 @@ class Chirp extends Component {
           >
             {userHandle}
           </Typography>
+          {deleteButton}
           <Typography variant="body2" color="textSecondary">
             {dayjs(createdAt).fromNow()}
           </Typography>

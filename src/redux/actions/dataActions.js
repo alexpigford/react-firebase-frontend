@@ -2,7 +2,8 @@ import {
   SET_CHIRPS,
   LOADING_DATA,
   LIKE_CHIRP,
-  UNLIKE_CHIRP
+  UNLIKE_CHIRP,
+  DELETE_CHIRP,
 } from "../types";
 import axios from "axios";
 
@@ -47,6 +48,16 @@ export const unlikeChirp = (chirpId) => (dispatch) => {
         type: UNLIKE_CHIRP,
         payload: res.data,
       });
+    })
+    .catch((err) => console.log(err));
+};
+
+// delete a chirp
+export const deleteChirp = (chirpId) => (dispatch) => {
+  axios
+    .delete(`/chirp/${chirpId}`)
+    .then(() => {
+      dispatch({ type: DELETE_CHIRP, payload: chirpId });
     })
     .catch((err) => console.log(err));
 };

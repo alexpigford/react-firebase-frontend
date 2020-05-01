@@ -15,3 +15,4 @@ export const SET_CHIRPS = "SET_CHIRPS";
 export const SET_CHIRP = "SET_CHIRP";
 export const LIKE_CHIRP = "LIKE_CHIRP";
 export const UNLIKE_CHIRP = "UNLIKE_CHIRP";
+export const DELETE_CHIRP = "DELETE_CHIRP";
