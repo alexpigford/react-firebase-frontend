@@ -18,3 +18,4 @@ export const LIKE_CHIRP = "LIKE_CHIRP";
 export const UNLIKE_CHIRP = "UNLIKE_CHIRP";
 export const DELETE_CHIRP = "DELETE_CHIRP";
 export const POST_CHIRP = "POST_CHIRP";
+export const SUBMIT_REPLY = "SUBMIT_REPLY";

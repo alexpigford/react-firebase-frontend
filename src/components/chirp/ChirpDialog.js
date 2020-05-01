@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import LikeButton from "./LikeButton";
 import Replies from "./Replies";
+import ReplyForm from "./ReplyForm";
 
 // MUI
 import Dialog from "@material-ui/core/Dialog";
@@ -21,7 +22,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 
 // redux
 import { connect } from "react-redux";
-import { getChirp } from "../../redux/actions/dataActions";
+import { getChirp, clearErrors } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
   ...theme.restOfTheme,
@@ -61,6 +62,7 @@ class ChirpDialog extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.props.clearErrors();
   };
 
   render() {
@@ -111,6 +113,7 @@ class ChirpDialog extends Component {
           <span>{replyCount} Replies</span>
         </Grid>
         <hr className={classes.visibleSeparator} />
+        <ReplyForm chirpId={chirpId} />
         <Replies replies={replies} />
       </Grid>
     );
@@ -147,6 +150,7 @@ class ChirpDialog extends Component {
 }
 
 ChirpDialog.propTypes = {
+  clearErrors: PropTypes.func.isRequired,
   getChirp: PropTypes.func.isRequired,
   chirpId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
@@ -161,6 +165,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = {
   getChirp,
+  clearErrors,
 };
 
 export default connect(

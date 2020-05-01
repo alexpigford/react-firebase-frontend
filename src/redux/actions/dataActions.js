@@ -10,6 +10,7 @@ import {
   SET_ERRORS,
   POST_CHIRP,
   STOP_LOADING_UI,
+  SUBMIT_REPLY,
 } from "../types";
 import axios from "axios";
 
@@ -61,9 +62,7 @@ export const postChirp = (newChirp) => (dispatch) => {
         type: POST_CHIRP,
         payload: res.data,
       });
-      dispatch({
-        type: CLEAR_ERRORS,
-      });
+      dispatch(clearErrors());
     })
     .catch((err) => {
       dispatch({
@@ -97,6 +96,25 @@ export const unlikeChirp = (chirpId) => (dispatch) => {
       });
     })
     .catch((err) => console.log(err));
+};
+
+// submit a reply
+export const submitReply = (chirpId, replyData) => (dispatch) => {
+  axios
+    .post(`/chirp/${chirpId}/reply`, replyData)
+    .then((res) => {
+      dispatch({
+        type: SUBMIT_REPLY,
+        payload: res.data,
+      });
+      dispatch(clearErrors());
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
+    });
 };
 
 // delete a chirp

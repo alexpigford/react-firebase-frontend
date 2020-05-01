@@ -6,6 +6,7 @@ import {
   DELETE_CHIRP,
   POST_CHIRP,
   SET_CHIRP,
+  SUBMIT_REPLY,
 } from "../types";
 
 const initialState = {
@@ -55,6 +56,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         chirps: [action.payload, ...state.chirps],
+      };
+    case SUBMIT_REPLY:
+      return {
+        ...state,
+        chirp: {
+          ...state.chirp,
+          replies: [action.payload, ...state.chirp.replies],
+        },
       };
     default:
       return state;
