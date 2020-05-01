@@ -6,6 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import PropTypes from "prop-types";
 import MyButton from "../utility/MyButton";
 import DeleteChirp from "./DeleteChirp";
+import ChirpDialog from "./ChirpDialog";
 
 // MUI
 import Card from "@material-ui/core/Card";
@@ -124,6 +125,7 @@ class Chirp extends Component {
             <ChatIcon color="primary" />
           </MyButton>
           <span>{replyCount} Replies</span>
+          <ChirpDialog chirpId={chirpId} userHandle={userHandle} />
         </CardContent>
       </Card>
     );

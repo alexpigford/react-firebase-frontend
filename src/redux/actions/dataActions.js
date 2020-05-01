@@ -1,5 +1,6 @@
 import {
   SET_CHIRPS,
+  SET_CHIRP,
   LOADING_DATA,
   LIKE_CHIRP,
   UNLIKE_CHIRP,
@@ -8,6 +9,7 @@ import {
   CLEAR_ERRORS,
   SET_ERRORS,
   POST_CHIRP,
+  STOP_LOADING_UI,
 } from "../types";
 import axios from "axios";
 
@@ -28,6 +30,25 @@ export const getChirps = () => (dispatch) => {
         payload: [],
       });
     });
+};
+
+// chirp dialog
+export const getChirp = (chirpId) => (dispatch) => {
+  dispatch({
+    type: LOADING_UI,
+  });
+  axios
+    .get(`/chirp/${chirpId}`)
+    .then((res) => {
+      dispatch({
+        type: SET_CHIRP,
+        payload: res.data,
+      });
+      dispatch({
+        type: STOP_LOADING_UI,
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 // post a chirp
@@ -86,4 +107,10 @@ export const deleteChirp = (chirpId) => (dispatch) => {
       dispatch({ type: DELETE_CHIRP, payload: chirpId });
     })
     .catch((err) => console.log(err));
+};
+
+export const clearErrors = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
 };

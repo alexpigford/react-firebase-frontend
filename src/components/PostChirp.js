@@ -5,7 +5,7 @@ import MyButton from "../utility/MyButton";
 
 //redux
 import { connect } from "react-redux";
-import { postChirp } from "../redux/actions/dataActions";
+import { postChirp, clearErrors } from "../redux/actions/dataActions";
 
 // MUI
 import Button from "@material-ui/core/Button";
@@ -21,14 +21,17 @@ const styles = (theme) => ({
   ...theme.restOfTheme,
   submitButton: {
     position: "relative",
+    float: "right",
+    marginTop: 10,
+    marginBottom: 10,
   },
   progressSpinner: {
     position: "absolute",
   },
   closeButton: {
     position: "absolute",
-    left: "90%",
-    top: "10%",
+    left: "88%",
+    top: "4%",
   },
 });
 
@@ -46,8 +49,7 @@ class PostChirp extends Component {
       });
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ body: "" });
-      this.handleClose();
+      this.setState({ body: "", open: false, errors: {} });
     }
   }
 
@@ -56,6 +58,7 @@ class PostChirp extends Component {
   };
 
   handleClose = () => {
+    this.props.clearErrors();
     this.setState({ open: false, errors: {} });
   };
 
@@ -130,6 +133,7 @@ class PostChirp extends Component {
 
 PostChirp.propTypes = {
   postChirp: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
 };
 
@@ -137,6 +141,6 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-export default connect(mapStateToProps, { postChirp })(
+export default connect(mapStateToProps, { postChirp, clearErrors })(
   withStyles(styles)(PostChirp)
 );
