@@ -38,6 +38,9 @@ export default function (state = initialState, action) {
         (chirp) => chirp.chirpId === action.payload.chirpId
       );
       state.chirps[index] = action.payload;
+      if (state.chirp.chirpId === action.payload.chirpId) {
+        state.chirp = action.payload;
+      }
       return {
         ...state,
       };

@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import MyButton from "../utility/MyButton";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import LikeButton from "./LikeButton";
 
 // MUI
 import Dialog from "@material-ui/core/Dialog";
@@ -15,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 // icons
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
+import ChatIcon from "@material-ui/icons/Chat";
 
 // redux
 import { connect } from "react-redux";
@@ -38,6 +40,15 @@ const styles = (theme) => ({
   closeButton: {
     position: "absolute",
     left: "90%",
+  },
+  expandButton: {
+    position: "absolute",
+    left: "90%",
+  },
+  spinnerDiv: {
+    textAlign: "center",
+    marginTop: 50,
+    marginBottom: 50,
   },
 });
 
@@ -71,7 +82,9 @@ class ChirpDialog extends Component {
     } = this.props;
 
     const dialogMarkup = loading ? (
-      <CircularProgress size={200} />
+      <div className={classes.spinnerDiv}>
+        <CircularProgress size={200} thickness={2} />
+      </div>
     ) : (
       <Grid container spacing={5}>
         <Grid item sm={5}>
@@ -96,6 +109,12 @@ class ChirpDialog extends Component {
           </Typography>
           <hr className={classes.invisibleSeparator} />
           <Typography variant="body1">{body}</Typography>
+          <LikeButton chirpId={chirpId} />
+          <span>{likeCount} Likes</span>
+          <MyButton tip="replies">
+            <ChatIcon color="primary" />
+          </MyButton>
+          <span>{replyCount} Replies</span>
         </Grid>
       </Grid>
     );
