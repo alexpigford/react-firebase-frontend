@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
       );
       state.chirps[index] = action.payload;
       if (state.chirp.chirpId === action.payload.chirpId) {
-        state.chirp = action.payload;
+        state.chirp = { ...state.chirp, ...action.payload };
       }
       return {
         ...state,

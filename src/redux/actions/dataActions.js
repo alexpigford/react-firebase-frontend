@@ -127,6 +127,24 @@ export const deleteChirp = (chirpId) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+export const getUserData = (userHandle) => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get(`/user/${userHandle}`)
+    .then((res) => {
+      dispatch({
+        type: SET_CHIRPS,
+        payload: res.data.chirps,
+      });
+    })
+    .catch(() => {
+      dispatch({
+        type: SET_CHIRPS,
+        payload: null,
+      });
+    });
+};
+
 export const clearErrors = () => (dispatch) => {
   dispatch({
     type: CLEAR_ERRORS,

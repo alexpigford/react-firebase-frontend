@@ -5,6 +5,7 @@ import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
+import user from "./pages/user";
 
 // redux
 import { Provider } from "react-redux";
@@ -49,6 +50,7 @@ class App extends Component {
                 <Route exact path="/" component={home} />
                 <AuthRoute exact path="/login" component={login} />
                 <AuthRoute exact path="/signup" component={signup} />
+                <Route exact path="/users/:handle" component={user} />
               </Switch>
             </div>
           </Router>
