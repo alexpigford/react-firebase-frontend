@@ -4,6 +4,7 @@ import {
   UNLIKE_CHIRP,
   LOADING_DATA,
   DELETE_CHIRP,
+  POST_CHIRP,
 } from "../types";
 
 const initialState = {
@@ -40,6 +41,11 @@ export default function (state = initialState, action) {
         chirps: state.chirps.filter(
           (chirp) => chirp.chirpId !== action.payload
         ),
+      };
+    case POST_CHIRP:
+      return {
+        ...state,
+        chirps: [action.payload, ...state.chirps],
       };
     default:
       return state;

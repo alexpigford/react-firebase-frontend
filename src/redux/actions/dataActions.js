@@ -4,6 +4,10 @@ import {
   LIKE_CHIRP,
   UNLIKE_CHIRP,
   DELETE_CHIRP,
+  LOADING_UI,
+  CLEAR_ERRORS,
+  SET_ERRORS,
+  POST_CHIRP,
 } from "../types";
 import axios from "axios";
 
@@ -22,6 +26,28 @@ export const getChirps = () => (dispatch) => {
       dispatch({
         type: SET_CHIRPS,
         payload: [],
+      });
+    });
+};
+
+// post a chirp
+export const postChirp = (newChirp) => (dispatch) => {
+  dispatch({ type: LOADING_UI });
+  axios
+    .post("/chirp", newChirp)
+    .then((res) => {
+      dispatch({
+        type: POST_CHIRP,
+        payload: res.data,
+      });
+      dispatch({
+        type: CLEAR_ERRORS,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
       });
     });
 };
