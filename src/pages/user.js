@@ -11,9 +11,14 @@ import { getUserData } from "../redux/actions/dataActions";
 class user extends Component {
   state = {
     profile: null,
+    chirpIdParam: null,
   };
   componentDidMount() {
     const handle = this.props.match.params.handle;
+    const chirpId = this.props.match.params.chirpId;
+
+    if (chirpId) this.setState({ chirpIdParam: chirpId });
+
     this.props.getUserData(handle);
     axios
       .get(`/user/${handle}`)
@@ -26,13 +31,20 @@ class user extends Component {
   }
   render() {
     const { chirps, loading } = this.props.data;
+    const { chirpIdParam } = this.state;
 
     const chirpsMarkup = loading ? (
       <p>Loading data...</p>
     ) : chirps === null ? (
       <p>This user hasn't chirped yet.</p>
-    ) : (
+    ) : !chirpIdParam ? (
       chirps.map((chirp) => <Chirp key={chirp.chirpId} chirp={chirp} />)
+    ) : (
+      chirps.map((chirp) => {
+        if (chirp.chirpId !== chirpIdParam)
+          return <Chirp key={chirp.chirpId} chirp={chirp} />;
+        else return <Chirp key={chirp.chirpId} chirp={chirp} openDialog />;
+      })
     );
 
     return (
