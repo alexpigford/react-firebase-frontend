@@ -27,7 +27,7 @@ const styles = (theme) => ({
     margin: 4,
   },
   profileImage: {
-    maxWidth: 200,
+    width: 200,
     height: 200,
     borderRadius: "50%",
     objectFit: "cover",
@@ -109,10 +109,12 @@ class ChirpDialog extends Component {
         >
           <UnfoldMore color="primary" />
         </MyButton>
-        <Dialog>
+        <Dialog
           open={this.state.open}
           onClose={this.handleClose}
-          fullWidth maxWidth="sm" >
+          fullWidth
+          maxWidth="sm"
+        >
           <MyButton
             tip="Close"
             onClick={this.handleClose}
