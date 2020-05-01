@@ -5,6 +5,9 @@ import Chirp from "../components/chirp/Chirp";
 import StaticProfile from "../components/profile/StaticProfile";
 import Grid from "@material-ui/core/Grid";
 
+import ChirpSkeleton from "../utility/ChirpSkeleton";
+import ProfileSkeleton from "../utility/ProfileSkeleton";
+
 import { connect } from "react-redux";
 import { getUserData } from "../redux/actions/dataActions";
 
@@ -34,7 +37,7 @@ class user extends Component {
     const { chirpIdParam } = this.state;
 
     const chirpsMarkup = loading ? (
-      <p>Loading data...</p>
+      <ChirpSkeleton />
     ) : chirps === null ? (
       <p>This user hasn't chirped yet.</p>
     ) : !chirpIdParam ? (
@@ -54,7 +57,7 @@ class user extends Component {
         </Grid>
         <Grid item sm={4} xs={12}>
           {this.state.profile === null ? (
-            <p>Loading profile...</p>
+            <ProfileSkeleton />
           ) : (
             <StaticProfile profile={this.state.profile} />
           )}

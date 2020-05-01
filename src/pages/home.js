@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import Chirp from "../components/chirp/Chirp";
 import Profile from "../components/profile/Profile";
+import ChirpSkeleton from "../utility/ChirpSkeleton";
 
 import { connect } from "react-redux";
 import { getChirps } from "../redux/actions/dataActions";
@@ -17,7 +18,7 @@ class home extends Component {
     let recentChirpsMarkup = !loading ? (
       chirps.map((chirp) => <Chirp key={chirp.chirpId} chirp={chirp} />)
     ) : (
-      <p>Loading...</p>
+      <ChirpSkeleton />
     );
     return (
       <Grid container spacing={5}>
